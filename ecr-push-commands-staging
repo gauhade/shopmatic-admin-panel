@@ -1,0 +1,28 @@
+For Nginx Registry Staging
+
+1. aws ecr get-login --no-include-email --region ap-southeast-1 ( login to ecr )
+2. docker build -t shopmaticworld-adminpanel/admin-panel-nginx . ( build docker image )
+3. docker tag shopmaticworld-adminpanel/admin-panel-nginx:latest 274850155276.dkr.ecr.ap-southeast-1.amazonaws.com/shopmatic-adminpanel/admin-panel-nginx:latest ( tag image )
+4. docker push 274850155276.dkr.ecr.ap-southeast-1.amazonaws.com/shopmatic-adminpanel/admin-panel-nginx:latest (push the image to ecr)
+
+For Admin-Panel-App Registry:
+
+1. docker build --build-arg RAILS_ENV=production -t shopmaticworld-adminpanel/admin-panel-app .
+2. docker tag shopmaticworld-adminpanel/admin-panel-app:latest 274850155276.dkr.ecr.ap-southeast-1.amazonaws.com/shopmatic-adminpanel/admin-panel-app:latest ( tag image )
+3. docker push 274850155276.dkr.ecr.ap-southeast-1.amazonaws.com/shopmatic-adminpanel/admin-panel-app:latest (push the image to ecr)
+----------------------------------------------------------
+For Nginx Registry production
+
+1. aws ecr get-login --no-include-email --region ap-southeast-1 ( login to ecr )
+2. docker build -t shopmaticworld-adminpanel/admin-panel-nginx . ( build docker image )
+3. docker tag shopmaticworld-adminpanel/admin-panel-nginx:latest 471923766012.dkr.ecr.ap-southeast-1.amazonaws.com/shopmatic-adminpanel/admin-panel-nginx:latest ( tag image )
+4. docker push 471923766012.dkr.ecr.ap-southeast-1.amazonaws.com/shopmatic-adminpanel/admin-panel-nginx:latest (push the image to ecr)
+
+For Admin-Panel-App Registry:
+
+1. docker build --build-arg RAILS_ENV=production -t shopmaticworld-adminpanel/admin-panel-app .
+2. docker tag shopmaticworld-adminpanel/admin-panel-app:latest 471923766012.dkr.ecr.ap-southeast-1.amazonaws.com/shopmatic-adminpanel/admin-panel-app:latest ( tag image )
+3. docker push 471923766012.dkr.ecr.ap-southeast-1.amazonaws.com/shopmatic-adminpanel/admin-panel-app:latest (push the image to ecr)
+
+
+https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/

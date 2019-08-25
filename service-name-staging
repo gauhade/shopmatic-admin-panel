@@ -1,0 +1,18 @@
+{
+    "cluster": "shopmatic-adminpanel",
+    "serviceName": "adminpanel-docker",
+    "taskDefinition": "adminpanel-docker",
+    "loadBalancers": [
+        {
+            "loadBalancerName": "shopmatic-world-web-ecs",
+            "containerName": "admin-panel-nginx",
+            "containerPort": 80
+        }
+    ],
+    "role": "ecsServiceRole",
+    "desiredCount": 2,
+    "deploymentConfiguration": {
+        "maximumPercent": 100,
+        "minimumHealthyPercent": 50
+    }
+}

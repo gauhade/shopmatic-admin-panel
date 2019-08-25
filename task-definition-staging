@@ -1,0 +1,82 @@
+{
+"containerDefinitions": [
+  {
+    "name": "admin-panel-nginx",
+    "image": "274850155276.dkr.ecr.ap-southeast-1.amazonaws.com/shopmatic-adminpanel/admin-panel-nginx",
+    "portMappings": [
+      {
+        "containerPort": 80,
+        "hostPort": 80
+      }
+    ],
+    "links": ["admin-panel-app:admin-panel-app"],
+    "volumesFrom": [
+      {
+        "sourceContainer": "admin-panel-app"
+      }
+    ],
+    "cpu": 250,
+    "memory": 250
+  },
+  {
+    "name": "admin-panel-app",
+    "image": "274850155276.dkr.ecr.ap-southeast-1.amazonaws.com/shopmatic-adminpanel/admin-panel-app",
+    "portMappings": [
+      {
+        "containerPort": 3000,
+        "hostPort": 3000
+      }
+    ],
+    "cpu": 300,
+    "memory": 500,
+    "environment": [
+      {
+        "name": "RAILS_ENV",
+        "value": "staging"
+      },
+
+      {
+        "name": "EXTENSIVE_DEBUG",
+        "value": "0"
+      },
+      {
+        "name": "PAPERTRAIL_IP",
+        "value": "logs6.papertrailapp.com"
+      },
+      {
+        "name": "PAPERTRAIL_PORT",
+        "value": "53894"
+      },
+      {
+        "name": "ALLOWED_HOSTS",
+        "value": ""
+      },
+      {
+        "name": "RAILS_SERVE_STATIC_FILES",
+        "value": "1"
+      },
+      {
+        "name": "HONEYBADGER_API_KEY",
+        "value": "74e048e0"
+      },
+      {
+        "name": "APPSIGNAL_PUSH_API_KEY",
+        "value": "a0c46950-fa98-4275-ac0e-dbb19cd20e06"
+      },
+      {
+        "name": "SECRET_KEY_BASE",
+        "value": "3e8c8244eeca6c31aeddcdcdd41b661b6d3b7327679a3dc43a05bc8c3aa56ccaa75c14f80e4033e909a49b3ef5c3e3558657af225c0a63c04daae64e15bfb2f9"
+      },
+      {
+        "name": "SAP_BASE_URI",
+        "value": "https://sap-api.myshopmaticbeta.com"
+      },
+      {
+        "name": "MCP_BASE_URI",
+        "value": "https://shopmatic.pro"
+      }
+    ]
+  }
+],
+"family": "adminpanel-docker"
+}

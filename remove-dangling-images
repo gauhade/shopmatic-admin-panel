@@ -1,0 +1,62 @@
+
+docker images ( remove old images )
+
+docker rmi -f $(docker images -q -f dangling=true)
+
+docker rmi $(docker images -a)
+
+docker ps -a  ( remove exited containers )
+
+docker ps -aq --no-trunc -f status=exited | xargs docker rm
+
+docker commit  06ff52469f27 gaurav-test ( to take snapshot of containers )
+
+docker exec -it 06ff52469f27 uptime ( to check server running time )
+
+docker exec -it 06ff52469f27 ps -ef ( check the processes )
+
+To Attach the volume and run the conatiner on custom ports
+
+docker run -itd -p 8888:8080 -v /tmp/jenkins/:/var/jenkins_home --name production_jenkins jenkins
+
+docker run --name gaurav-nginx -p 8080:80 -v /Users/gauhade/Desktop/AWS-RAD-Training/Edu-Online/custom-html/Restaurant-master/:/usr/share/nginx/html:ro -d nginx
+
+docker network ls ( list of networks and which one its using bydefault is bridge )
+
+bridge - to accept internal/external connections
+host - to accept only internal connections
+none - no connections
+
+docker inspect container-id
+
+Docker Networking :
+---------------------
+
+docker network ls ( to list details )
+
+docker network create \
+--driver=bridge \
+--subnet=172.28.0.0/16 \
+--ip-range=172.28.5.0/24 \
+--gateway=172.28.5.254 \
+br0
+
+docker run -dit --name app1 --net=br0 centos /bin/bash
+docker run -dit --name app2 --net=br0 centos /bin/bash
+docker run -dit --name app3  centos /bin/bash
+
+docker network ls
+
+docker inspect bridge ( check defualt network and associated containers)
+docker inspect br0 ( check custom network and associated containers)
+
+docker ps ( check running containers)
+
+docker attach app1
+ping app2 ( it will ping as app2 is also created in same ntwok)
+ping app1 ( it will ping by itself)
+ping 171.98.5.1 ( some conatiner ip to ping )
+
+Npte : default network doesn't all dns to be communicated but by creating non defautl network it allow dns ping.
+
+docker inspect container_id ( you can see docker images cidr range listing)
